@@ -1,0 +1,32 @@
+# SENTINEL Decision & Confidence Policies
+
+confidence:
+  approve_threshold: 0.75
+  escalation_threshold: 0.55
+  weights:
+    rag_relevance: 0.25
+    accessibility: 0.25
+    risk: 0.20
+    schema_validity: 0.15
+    evidence_coverage: 0.15
+
+decision_rules:
+  # When risk is HIGH or CRITICAL with high impact or irreversibility -> BLOCK
+  block_on_high_risk: true
+  
+  # When accessibility barriers are detected and alternatives exist -> REPLACE
+  replace_on_barrier: true
+  
+  # When confidence is below escalation threshold -> ESCALATE
+  escalate_on_low_confidence: true
+
+risk_levels:
+  - "LOW"
+  - "MEDIUM"
+  - "HIGH"
+  - "CRITICAL"
+
+accessibility_statuses:
+  - "ACCESSIBLE"
+  - "FRAGILE"
+  - "UNKNOWN"

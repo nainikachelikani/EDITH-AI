@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sentinel-guard"
+version = "1.0.0"
+description = "SENTINEL: An Intelligent Accessibility and Safety Layer for AI Agents"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "streamlit",
+    "ollama",
+    "langgraph",
+    "langchain-core",
+    "chromadb",
+    "fastmcp",
+    "pydantic",
+    "python-dotenv",
+    "pyyaml"
+]

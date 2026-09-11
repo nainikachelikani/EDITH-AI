@@ -1,0 +1,79 @@
+{
+  "policies": [
+    {
+      "id": "policy_destructive_deletion",
+      "name": "Permanent Data Deletion Guardrail",
+      "description": "Any action that permanently deletes, removes, or purges user files, assignments, projects, or personal records from persistent storage.",
+      "impact_level": "CRITICAL",
+      "reversible": false,
+      "requires_confirmation": true,
+      "applicable_conditions": {
+        "operation_categories": ["delete", "purge", "remove", "drop_table", "destroy", "wipe"],
+        "data_sensitivity": ["high", "critical"],
+        "irreversible_only": true
+      },
+      "policy_recommendation": "BLOCK",
+      "mitigation_instructions": "Halt automatic execution. Present deletion target, data loss warning, and require explicit Human-In-The-Loop authorization before proceeding."
+    },
+    {
+      "id": "policy_irrevocable_submission",
+      "name": "Irrevocable Final Submission Guardrail",
+      "description": "Actions that formally submit final work, semester exams, official declarations, legal agreements, or scholarship applications where submission cannot be rescinded or edited after transmission.",
+      "impact_level": "HIGH",
+      "reversible": false,
+      "requires_confirmation": true,
+      "applicable_conditions": {
+        "operation_categories": ["submit_final", "finalize", "publish", "commit_grade"],
+        "data_sensitivity": ["high"],
+        "irreversible_only": true
+      },
+      "policy_recommendation": "BLOCK",
+      "mitigation_instructions": "Require human confirmation with summary of attached documents and warning that submission is final and binding."
+    },
+    {
+      "id": "policy_financial_transaction",
+      "name": "Financial & Payment Authorization",
+      "description": "Actions authorizing payment, credit card charge, fee payment, or monetary transfer.",
+      "impact_level": "CRITICAL",
+      "reversible": false,
+      "requires_confirmation": true,
+      "applicable_conditions": {
+        "operation_categories": ["payment", "charge", "transfer", "buy", "purchase"],
+        "data_sensitivity": ["critical"],
+        "irreversible_only": false
+      },
+      "policy_recommendation": "BLOCK",
+      "mitigation_instructions": "Display full transaction amount, recipient, and require biometric or two-step user confirmation."
+    },
+    {
+      "id": "policy_mass_modification",
+      "name": "Mass or Batch State Modification",
+      "description": "Bulk modifications affecting more than 5 records, batch unenrollment, or wiping course configurations.",
+      "impact_level": "HIGH",
+      "reversible": false,
+      "requires_confirmation": true,
+      "applicable_conditions": {
+        "operation_categories": ["batch_update", "mass_edit", "bulk_reset"],
+        "data_sensitivity": ["medium", "high"],
+        "irreversible_only": false
+      },
+      "policy_recommendation": "BLOCK",
+      "mitigation_instructions": "Present scope of affected items and require user confirmation."
+    },
+    {
+      "id": "policy_unverified_external_transmission",
+      "name": "External Communication & Message Transmission",
+      "description": "Broadcasting emails, messages to course instructors or entire class rosters on behalf of the user.",
+      "impact_level": "MEDIUM",
+      "reversible": false,
+      "requires_confirmation": true,
+      "applicable_conditions": {
+        "operation_categories": ["send_email", "broadcast_message", "post_announcement"],
+        "data_sensitivity": ["medium"],
+        "irreversible_only": false
+      },
+      "policy_recommendation": "BLOCK",
+      "mitigation_instructions": "Display full recipient list and draft content for user review."
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+# SENTINEL Configuration
+app:
+  name: "SENTINEL"
+  tagline: "An Intelligent Accessibility and Safety Layer for AI Agents"
+  version: "1.0.0"
+
+ollama:
+  base_url: "http://localhost:11434"
+  model: "llama3.2:latest"
+  embed_model: "nomic-embed-text"
+  temperature: 0.1
+  timeout_seconds: 180
+
+storage:
+  chroma_path: "storage/chroma"
+  trace_path: "storage/traces/sentinel_traces.jsonl"
+  knowledge_path: "data/accessibility_knowledge.json"
+  safety_policy_path: "data/safety_policy.json"
+
+rag:
+  top_k: 4
+  similarity_threshold: 0.35
+
+execution:
+  max_replacement_attempts: 1
+  require_explicit_confirmation: true
