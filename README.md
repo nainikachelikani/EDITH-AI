@@ -4,6 +4,10 @@
 
 > **EDITH-AI supervises computer-use AI before actions are authorized — making agentic computer interaction more accessible, safer, explainable, and accountable.**
 
+<p align="center">
+  <img src="assets/edith-banner.png" alt="EDITH-AI" width="900">
+</p>
+
 **Team:** Techies404  
 **Hackathon Track:** **Track 02 — Assistive, Accessible & Inclusive Tech**  
 **Secondary Strength:** Trustworthy, Responsible & Secure AI  
