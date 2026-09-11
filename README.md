@@ -5,7 +5,7 @@
 > **EDITH-AI supervises computer-use AI before actions are authorized — making agentic computer interaction more accessible, safer, explainable, and accountable.**
 
 <p align="center">
-  <img src="assets/edith-banner.png" alt="EDITH-AI" width="900">
+  <img src="assets/edith-dashboard.jpeg" alt="EDITH-AI" width="900">
 </p>
 
 **Team:** Techies404  
