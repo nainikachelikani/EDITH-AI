@@ -1,4 +1,4 @@
-# 🛡️ SENTINEL
+# 🛡️ EDITH-AI
 > **"An Intelligent Accessibility and Safety Layer for AI Agents"**
 
 🏆 **Hackathon Track:** Track 02 — Assistive, Accessible & Inclusive Tech  
@@ -17,8 +17,8 @@ AI computer-use agents are increasingly capable of interacting directly with sof
 
 ## 💡 Solution
 
-**SENTINEL is NOT another computer-use agent.**  
-SENTINEL is an intelligent, domain-independent supervisory layer that sits between an AI computer-use agent and the action execution layer.
+**EDITH-AI is NOT another computer-use agent.**  
+EDITH-AI is an intelligent, domain-independent supervisory layer that sits between an AI computer-use agent and the action execution layer.
 
 Every proposed interaction is intercepted and dynamically evaluated against:
 - **WCAG 2.1 & 2.2 Accessibility Guidelines** via persistent ChromaDB semantic RAG.
@@ -93,7 +93,7 @@ Every proposed interaction is intercepted and dynamically evaluated against:
 
 ## 🤖 Multi-Agent Architecture (LangGraph)
 
-SENTINEL implements a real **LangGraph StateGraph** featuring 7 independent, cooperating agents:
+EDITH-AI implements a real **LangGraph StateGraph** featuring 7 independent, cooperating agents:
 
 1. **Intent Agent (`agents/intent_agent.py`):** Understands high-level user goals, application domains, and constraints using Ollama structured JSON.
 2. **Action Planner Agent (`agents/action_planner.py`):** Decomposes user goals into granular computer action steps (e.g. click, navigate, upload, drag, delete).
@@ -107,7 +107,7 @@ SENTINEL implements a real **LangGraph StateGraph** featuring 7 independent, coo
 
 ## 📚 ChromaDB Semantic RAG
 
-SENTINEL's accessibility knowledge base (`data/accessibility_knowledge.json`) contains 15+ curated documents covering:
+EDITH-AI's accessibility knowledge base (`data/accessibility_knowledge.json`) contains 15+ curated documents covering:
 - **WCAG 2.1.1 Keyboard Accessibility** (single-pointer and keyboard operation)
 - **WCAG 2.4.7 Focus Visible & 2.4.3 Focus Order** (focus styling and modal trap prevention)
 - **WCAG 2.5.7 Dragging Movements** (alternatives to drag-and-drop actions)
@@ -123,7 +123,7 @@ Embeddings run locally and offline via ChromaDB with dense semantic projection, 
 
 ## ⚡ FastMCP Tool Integration
 
-SENTINEL exposes and invokes real **FastMCP** tools (`sentinel_mcp/tools.py`):
+EDITH-AI exposes and invokes real **FastMCP** tools (`sentinel_mcp/tools.py`):
 - `retrieve_accessibility_guidance(query, top_k)`: Queries ChromaDB and returns ranked guidelines, citations, and alternatives.
 - `analyze_action_context(action_type, target, description)`: Inspects interactivity modality and barrier patterns.
 - `get_safety_policy(action_type, target, impact_description)`: Matches configurable policies from `data/safety_policy.json`.
@@ -160,7 +160,7 @@ Policies are declared as data in `data/safety_policy.json` and thresholds in `co
 
 ## 👤 Human-in-the-Loop Semantics
 
-SENTINEL enforces supervisory human-in-the-loop semantics:
+EDITH-AI enforces supervisory human-in-the-loop semantics:
 - `PENDING_CONFIRMATION`: High-risk action paused awaiting sign-off.
 - `HUMAN_AUTHORIZED`: User confirms action $\rightarrow$ supervisory approval granted.
 - `ACTION CANCELLED`: User cancels action $\rightarrow$ execution aborted.
@@ -181,7 +181,7 @@ All agent actions, tool calls, and decisions are appended in real-time to `stora
 
 ## 🧪 Gold Set Evaluation
 
-SENTINEL includes an automated evaluation suite (`evaluation/gold_set.json` & `evaluation/evaluator.py`) with 16 diverse test cases covering education, enterprise, and finance domains. Evaluates:
+EDITH-AI includes an automated evaluation suite (`evaluation/gold_set.json` & `evaluation/evaluator.py`) with 16 diverse test cases covering education, enterprise, and finance domains. Evaluates:
 - Decision Accuracy
 - Accessibility Classification Accuracy
 - Risk Classification Accuracy

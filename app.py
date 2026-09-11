@@ -1,5 +1,5 @@
 """
-🛡️ SENTINEL - Intelligent Accessibility and Safety Layer for AI Agents
+🛡️ EDITH-AI - Intelligent Accessibility and Safety Layer for AI Agents
 Main Streamlit Application.
 """
 import os
@@ -11,103 +11,249 @@ from typing import Dict, Any, List
 
 # Streamlit Page Config
 st.set_page_config(
-    page_title="SENTINEL - AI Accessibility & Safety Layer",
+    page_title="EDITH-AI - AI Accessibility & Safety Layer",
     page_icon="🛡️",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# Custom Dark Professional CSS
+# Custom Dark Professional CSS - EDITH-AI Cyber-Glass Theme
 st.markdown("""
 <style>
-    /* Dark safety theme styling */
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
+    /* Global styling */
     .stApp {
-        background-color: #0b0f19;
+        background: radial-gradient(circle at 50% 0%, rgba(14, 165, 233, 0.08) 0%, rgba(11, 15, 25, 1) 70%), #070b14;
         color: #e2e8f0;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     }
+
+    /* Headings */
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Outfit', sans-serif !important;
+        letter-spacing: -0.01em;
+    }
+
+    /* Main Header Banner */
     .main-header {
-        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-        border: 1px solid #334155;
-        border-radius: 12px;
-        padding: 24px;
+        background: linear-gradient(135deg, rgba(30, 41, 59, 0.75) 0%, rgba(15, 23, 42, 0.9) 100%);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(56, 189, 248, 0.3);
+        border-radius: 16px;
+        padding: 26px 30px;
         margin-bottom: 24px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7), 0 0 25px rgba(56, 189, 248, 0.1);
+        position: relative;
+        overflow: hidden;
     }
+    .main-header::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #00e5ff, #38bdf8, transparent);
+    }
+
+    /* Pill Badges */
     .badge-bar {
         display: flex;
         flex-wrap: wrap;
-        gap: 8px;
-        margin-top: 12px;
+        gap: 10px;
+        margin-top: 14px;
     }
     .badge {
-        background: #1e293b;
+        background: rgba(15, 23, 42, 0.85);
         color: #38bdf8;
-        border: 1px solid #0284c7;
+        border: 1px solid rgba(56, 189, 248, 0.35);
         border-radius: 9999px;
-        padding: 4px 12px;
-        font-size: 0.8rem;
+        padding: 5px 14px;
+        font-size: 0.82rem;
         font-weight: 600;
+        letter-spacing: 0.3px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        transition: all 0.2s ease;
     }
+    .badge:hover {
+        border-color: #38bdf8;
+        box-shadow: 0 0 14px rgba(56, 189, 248, 0.4);
+        transform: translateY(-1px);
+    }
+
+    /* Cards */
     .card {
-        background-color: #131c2e;
-        border: 1px solid #23324d;
-        border-radius: 10px;
-        padding: 18px;
-        margin-bottom: 16px;
+        background: linear-gradient(145deg, rgba(19, 28, 46, 0.85) 0%, rgba(13, 20, 36, 0.9) 100%);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(56, 189, 248, 0.18);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 18px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
     }
+    .card:hover {
+        border-color: rgba(56, 189, 248, 0.38);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 15px rgba(56, 189, 248, 0.08);
+    }
+
     .card-title {
-        font-size: 1.1rem;
+        font-family: 'Outfit', sans-serif;
+        font-size: 1.15rem;
         font-weight: 700;
-        margin-bottom: 8px;
+        margin-bottom: 10px;
         color: #f8fafc;
         display: flex;
         align-items: center;
         gap: 8px;
+        letter-spacing: 0.2px;
     }
+
+    /* High-Tech Supervisory HUD Decision Badges */
     .decision-approve {
-        background-color: #064e3b;
+        background: linear-gradient(135deg, rgba(6, 78, 59, 0.85) 0%, rgba(4, 47, 46, 0.95) 100%);
         color: #34d399;
-        border: 2px solid #059669;
-        padding: 8px 18px;
-        border-radius: 8px;
+        border: 1.5px solid #10b981;
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-family: 'Outfit', sans-serif;
         font-weight: 800;
-        font-size: 1.2rem;
+        font-size: 1.25rem;
         text-align: center;
+        letter-spacing: 1px;
+        box-shadow: 0 0 20px rgba(16, 185, 129, 0.25);
+        text-shadow: 0 0 12px rgba(52, 211, 153, 0.5);
     }
     .decision-replace {
-        background-color: #1e3a8a;
+        background: linear-gradient(135deg, rgba(30, 58, 138, 0.85) 0%, rgba(15, 23, 42, 0.95) 100%);
         color: #60a5fa;
-        border: 2px solid #2563eb;
-        padding: 8px 18px;
-        border-radius: 8px;
+        border: 1.5px solid #3b82f6;
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-family: 'Outfit', sans-serif;
         font-weight: 800;
-        font-size: 1.2rem;
+        font-size: 1.25rem;
         text-align: center;
+        letter-spacing: 1px;
+        box-shadow: 0 0 20px rgba(59, 130, 246, 0.25);
+        text-shadow: 0 0 12px rgba(96, 165, 250, 0.5);
     }
     .decision-block {
-        background-color: #7f1d1d;
+        background: linear-gradient(135deg, rgba(127, 29, 29, 0.85) 0%, rgba(69, 10, 10, 0.95) 100%);
         color: #f87171;
-        border: 2px solid #dc2626;
-        padding: 8px 18px;
-        border-radius: 8px;
+        border: 1.5px solid #ef4444;
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-family: 'Outfit', sans-serif;
         font-weight: 800;
-        font-size: 1.2rem;
+        font-size: 1.25rem;
         text-align: center;
+        letter-spacing: 1px;
+        box-shadow: 0 0 20px rgba(239, 68, 68, 0.25);
+        text-shadow: 0 0 12px rgba(248, 113, 113, 0.5);
     }
     .decision-escalate {
-        background-color: #78350f;
+        background: linear-gradient(135deg, rgba(120, 53, 15, 0.85) 0%, rgba(69, 26, 3, 0.95) 100%);
         color: #fbbf24;
-        border: 2px solid #d97706;
-        padding: 8px 18px;
-        border-radius: 8px;
+        border: 1.5px solid #f59e0b;
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-family: 'Outfit', sans-serif;
         font-weight: 800;
-        font-size: 1.2rem;
+        font-size: 1.25rem;
         text-align: center;
+        letter-spacing: 1px;
+        box-shadow: 0 0 20px rgba(245, 158, 11, 0.25);
+        text-shadow: 0 0 12px rgba(251, 191, 36, 0.5);
     }
+
     .step-box {
         border-left: 3px solid #38bdf8;
-        padding-left: 12px;
-        margin-bottom: 12px;
+        padding-left: 14px;
+        margin-bottom: 14px;
+        background: rgba(15, 23, 42, 0.4);
+        border-radius: 0 8px 8px 0;
+        padding-top: 6px;
+        padding-bottom: 6px;
+    }
+
+    /* Sidebar Dark Theme */
+    [data-testid="stSidebar"] {
+        background: linear-gradient(180deg, #0b1120 0%, #070b14 100%) !important;
+        border-right: 1px solid rgba(56, 189, 248, 0.15) !important;
+    }
+    [data-testid="stSidebar"] * {
+        color: #e2e8f0 !important;
+    }
+    [data-testid="stSidebar"] hr {
+        border-color: rgba(56, 189, 248, 0.15) !important;
+    }
+
+    /* Secondary Action Buttons (e.g. Scenarios) */
+    div.stButton > button:not([kind="primary"]) {
+        background: rgba(15, 23, 42, 0.75) !important;
+        color: #e2e8f0 !important;
+        border: 1px solid rgba(56, 189, 248, 0.25) !important;
+        border-radius: 8px !important;
+        font-family: 'Inter', sans-serif !important;
+        font-weight: 500 !important;
+        transition: all 0.2s ease-in-out !important;
+    }
+    div.stButton > button:not([kind="primary"]):hover {
+        border-color: #38bdf8 !important;
+        background: rgba(30, 41, 59, 0.9) !important;
+        color: #38bdf8 !important;
+        box-shadow: 0 0 14px rgba(56, 189, 248, 0.3) !important;
+        transform: translateY(-1px) !important;
+    }
+
+    /* Text Area Styling */
+    .stTextArea textarea {
+        background: rgba(15, 23, 42, 0.85) !important;
+        color: #f8fafc !important;
+        border: 1px solid rgba(56, 189, 248, 0.25) !important;
+        border-radius: 10px !important;
+        font-family: 'Inter', sans-serif !important;
+    }
+    .stTextArea textarea:focus {
+        border-color: #38bdf8 !important;
+        box-shadow: 0 0 16px rgba(56, 189, 248, 0.35) !important;
+    }
+
+    /* Primary Action Buttons */
+    div.stButton > button[kind="primary"] {
+        background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
+        border: 1px solid #38bdf8 !important;
+        font-family: 'Outfit', sans-serif !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.5px !important;
+        box-shadow: 0 0 20px rgba(56, 189, 248, 0.3) !important;
+        transition: all 0.2s ease-in-out !important;
+    }
+    div.stButton > button[kind="primary"]:hover {
+        background: linear-gradient(135deg, #0369a1 0%, #075985 100%) !important;
+        box-shadow: 0 0 28px rgba(56, 189, 248, 0.5) !important;
+        transform: translateY(-1px) !important;
+    }
+
+    /* Metric Cards */
+    div[data-testid="stMetric"] {
+        background: rgba(15, 23, 42, 0.7);
+        border: 1px solid rgba(56, 189, 248, 0.2);
+        border-radius: 10px;
+        padding: 12px 16px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    }
+    div[data-testid="stMetricLabel"] {
+        font-family: 'Inter', sans-serif;
+        color: #94a3b8;
+        font-size: 0.85rem;
+    }
+    div[data-testid="stMetricValue"] {
+        font-family: 'Outfit', sans-serif;
+        color: #f8fafc;
+        font-weight: 700;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -140,10 +286,10 @@ if "human_action_choice" not in st.session_state:
     st.session_state.human_action_choice = None
 
 # Sidebar Navigation
-st.sidebar.markdown("## 🛡️ SENTINEL NAVIGATION")
+st.sidebar.markdown("## 🛡️ EDITH-AI NAVIGATION")
 page = st.sidebar.radio(
     "Select View",
-    ["🛡️ Live Sentinel", "🔍 Observability & Traces", "📚 Knowledge Base", "📊 Evaluation", "⚙️ System Status"],
+    ["🛡️ Live EDITH-AI", "🔍 Observability & Traces", "📚 Knowledge Base", "📊 Evaluation", "⚙️ System Status"],
     index=0
 )
 
@@ -155,13 +301,13 @@ st.sidebar.caption(f"**Knowledge DB:** `ChromaDB (15 WCAG Docs)`")
 st.sidebar.caption(f"**Orchestration:** `LangGraph Multi-Agent`")
 st.sidebar.caption(f"**Tool Protocol:** `FastMCP`")
 
-# ----------------- PAGE 1: LIVE SENTINEL -----------------
-if page == "🛡️ Live Sentinel":
+# ----------------- PAGE 1: LIVE EDITH-AI -----------------
+if page == "🛡️ Live EDITH-AI":
     # Header Banner
     st.markdown("""
     <div class="main-header">
-        <h1 style="margin: 0; color: #f8fafc;">🛡️ SENTINEL</h1>
-        <h3 style="margin: 4px 0 0 0; color: #94a3b8; font-weight: 400;">
+        <h1 style="margin: 0; color: #f8fafc; font-family: 'Outfit', sans-serif; letter-spacing: 0.5px;">🛡️ EDITH-AI</h1>
+        <h3 style="margin: 4px 0 0 0; color: #94a3b8; font-weight: 400; font-family: 'Inter', sans-serif;">
             An Intelligent Accessibility and Safety Layer for AI Agents
         </h3>
         <div class="badge-bar">
@@ -199,13 +345,13 @@ if page == "🛡️ Live Sentinel":
         height=100
     )
 
-    run_clicked = st.button("🚀 RUN SENTINEL SUPERVISOR", type="primary", use_container_width=True)
+    run_clicked = st.button("🚀 RUN EDITH-AI SUPERVISOR", type="primary", use_container_width=True)
 
     if run_clicked and user_request.strip():
         st.session_state.human_action_choice = None
         workflow_id = f"wf_{uuid.uuid4().hex[:8]}"
 
-        with st.status("🛡️ Sentinel Supervisory Engine Running...", expanded=True) as status:
+        with st.status("🛡️ EDITH-AI Supervisory Engine Running...", expanded=True) as status:
             # 1. Intent Agent
             st.write("🧠 **Intent Agent:** Parsing natural language goal, constraints, and domain...")
             t0 = time.time()
@@ -312,7 +458,7 @@ if page == "🛡️ Live Sentinel":
                     "mcp_tool_calls": action_mcp_calls
                 })
 
-            status.update(label="✅ Sentinel Supervisory Analysis Complete!", state="complete", expanded=False)
+            status.update(label="✅ EDITH-AI Supervisory Analysis Complete!", state="complete", expanded=False)
 
         st.session_state.current_pipeline_result = {
             "workflow_id": workflow_id,
@@ -516,13 +662,13 @@ if page == "🛡️ Live Sentinel":
                             st.warning("Action proceeded under explicit human override. Supervisory Status: HUMAN_OVERRIDE (Logged to JSONL trace).")
 
                     if st.session_state.human_action_choice:
-                        st.info(f"Active Supervisory State: **{st.session_state.human_action_choice}** (Audited in Sentinel Traces)")
+                        st.info(f"Active Supervisory State: **{st.session_state.human_action_choice}** (Audited in EDITH-AI Traces)")
 
                 # Dynamic Narration Card
                 st.markdown("---")
                 st.markdown(f"""
                 <div class="card" style="background: #0f172a; border-left: 4px solid #38bdf8;">
-                    <div class="card-title" style="color: #38bdf8;">🗣️ Why Sentinel Made This Decision</div>
+                    <div class="card-title" style="color: #38bdf8;">🗣️ Why EDITH-AI Made This Decision</div>
                     <p style="font-size: 1rem; line-height: 1.5; color: #f1f5f9;">{narration.explanation}</p>
                     <p style="font-size: 0.95rem; color: #38bdf8; margin-top: 8px;"><strong>👉 Recommendation:</strong> {narration.recommendation}</p>
                 </div>
@@ -530,14 +676,14 @@ if page == "🛡️ Live Sentinel":
 
 # ----------------- PAGE 2: OBSERVABILITY & TRACES -----------------
 elif page == "🔍 Observability & Traces":
-    st.markdown("## 🔍 SENTINEL Observability & Trace Viewer")
+    st.markdown("## 🔍 EDITH-AI Observability & Trace Viewer")
     st.caption("Immutable real-time audit log of all agent executions, FastMCP tool calls, and decisions.")
 
     traces = trace_service.get_recent_traces(limit=100)
     workflows = trace_service.get_workflows_summary()
 
     if not traces:
-        st.info("No trace events recorded yet. Run a request in 'Live Sentinel' to generate real execution traces.")
+        st.info("No trace events recorded yet. Run a request in 'Live EDITH-AI' to generate real execution traces.")
     else:
         t_col1, t_col2 = st.columns([1, 3])
         with t_col1:
@@ -549,7 +695,7 @@ elif page == "🔍 Observability & Traces":
             st.download_button(
                 label="📥 Download Trace JSONL",
                 data=trace_content,
-                file_name="sentinel_traces.jsonl",
+                file_name="edith_ai_traces.jsonl",
                 mime="application/jsonl",
                 use_container_width=True
             )
@@ -641,7 +787,7 @@ elif page == "📊 Evaluation":
 
 # ----------------- PAGE 5: SYSTEM STATUS -----------------
 elif page == "⚙️ System Status":
-    st.markdown("## ⚙️ SENTINEL System Status & Diagnostic Dashboard")
+    st.markdown("## ⚙️ EDITH-AI System Status & Diagnostic Dashboard")
     st.caption("Real-time component health, local model availability, and runtime parameters.")
 
     status_data = system_service.get_full_system_status()

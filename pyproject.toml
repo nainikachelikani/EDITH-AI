@@ -3,9 +3,9 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sentinel-guard"
+name = "edith-ai"
 version = "1.0.0"
-description = "SENTINEL: An Intelligent Accessibility and Safety Layer for AI Agents"
+description = "EDITH-AI: An Intelligent Accessibility and Safety Layer for AI Agents"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [

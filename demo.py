@@ -1,5 +1,5 @@
 """
-SENTINEL CLI End-to-End Smoke Test (demo.py).
+EDITH-AI CLI End-to-End Smoke Test (demo.py).
 Fulfills Final Rule 2:
 Executes full request pipeline:
 User Request -> Intent -> Action Plan -> RAG -> Accessibility -> Risk -> Confidence -> Decision -> Narration -> Trace.
@@ -27,7 +27,7 @@ def print_step(step_name: str, details: str):
 
 def run_smoke_test(user_prompt: str = "Rearrange my files by dragging them"):
     workflow_id = f"demo_{uuid.uuid4().hex[:8]}"
-    print_header("SENTINEL: End-to-End CLI Supervisory Smoke Test")
+    print_header("EDITH-AI: End-to-End CLI Supervisory Smoke Test")
     print(f"Target Request: \"{user_prompt}\"", flush=True)
     print(f"Workflow ID:    {workflow_id}", flush=True)
     print("-" * 72, flush=True)

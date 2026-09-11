@@ -1,5 +1,5 @@
 """
-SENTINEL Settings and Configuration Loader.
+EDITH-AI Settings and Configuration Loader.
 Loads settings from YAML files and environment variables.
 """
 import os
@@ -23,7 +23,7 @@ _settings_yaml = load_yaml(BASE_DIR / "config" / "settings.yaml")
 _policies_yaml = load_yaml(BASE_DIR / "config" / "policies.yaml")
 
 class AppConfig(BaseModel):
-    name: str = _settings_yaml.get("app", {}).get("name", "SENTINEL")
+    name: str = _settings_yaml.get("app", {}).get("name", "EDITH-AI")
     tagline: str = _settings_yaml.get("app", {}).get("tagline", "An Intelligent Accessibility and Safety Layer for AI Agents")
     version: str = _settings_yaml.get("app", {}).get("version", "1.0.0")
 

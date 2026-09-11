@@ -1,6 +1,6 @@
-# SENTINEL Configuration
+# EDITH-AI Configuration
 app:
-  name: "SENTINEL"
+  name: "EDITH-AI"
   tagline: "An Intelligent Accessibility and Safety Layer for AI Agents"
   version: "1.0.0"
 
